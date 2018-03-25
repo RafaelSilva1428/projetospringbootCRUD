@@ -11,7 +11,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<body>
 	
 		<form class="form-inline" method="POST" th:object="${convidado}" 
-			th:action="@{/convidados/salva}" style="margin: 20px">
+			th:action="@{/convidados/salvar}" style="margin: 20px">
 			<div class="form-group">
 			<input type="text" class="form-control" th:field="*{nome}" 
 				placeholder="Nome"/>
@@ -31,12 +31,18 @@ xmlns:th="http://www.thymeleaf.org">
 						<tr>
 						<th>Nome</th>
 						<th>Acompanhantes</th>
+						<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="convidado : ${convidados}">
 							<td th:text="${convidado.nome}"></td>
 							<td th:text="${convidado.numeroAcompanhantes}"></td>
+							<td ><a th:href="@{'/convidados/apagar/'+${convidado.id}}" 
+									class="btn btn-link">Apagar</a>
+								<a th:href="@{'/convidados/editar/'+${convidado.id}}" 
+									class="btn btn-link">Editar</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>

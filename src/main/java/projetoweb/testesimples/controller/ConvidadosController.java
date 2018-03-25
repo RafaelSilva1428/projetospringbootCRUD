@@ -3,6 +3,7 @@ package projetoweb.testesimples.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,10 +27,17 @@ public class ConvidadosController {
 		return modelAndViewConvidados;
 	}
 	
-	@PostMapping(path="/salva")
+	@PostMapping(path="/salvar")
 	public String salva(Convidado convidado) {
 		this.repositoryConvidados.save(convidado);
 		return "redirect:/convidados/lista";
 	}
+	
+	@GetMapping(path="/apagar/{id}")
+	public String apagar(@PathVariable("id") Long id) {
+		this.repositoryConvidados.deleteById(id);
+		return "redirect:/convidados/lista";
+	}
+	
 	
 }
